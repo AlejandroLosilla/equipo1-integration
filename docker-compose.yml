@@ -3,13 +3,12 @@ services:
   postgres:
     image: postgres:12.8-alpine
     ports:
-      - "5432:5432"
+      - "5431:5432"
     environment:
       POSTGRES_USER: "admin"
       POSTGRES_PASSWORD: "password"
       POSTGRES_DB: "my-project"
-    volumes:
-      - ./docker/postgres/init/init.sql:/docker-entrypoint-initdb.d/init.sql
+
   mongo:
     image: mongo:6.0.7-jammy
     environment:
