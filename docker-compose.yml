@@ -16,3 +16,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: password
     ports:
       - "27017:27017"
+
+  redis:
+    image: redis:7.2.1-alpine
+    ports:
+      - "6379:6379"
+
