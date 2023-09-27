@@ -3,7 +3,7 @@ import { User } from "../domain/models/User.js"
 export class RegisterUser {
   /**
    * @param {UserRepository} userRepository
-   * @param {idGenerator} idGenerator
+   * @param {IdGenerator} idGenerator
    * @param {EmailSender} emailSender
    */
   constructor(userRepository, idGenerator, emailSender) {
