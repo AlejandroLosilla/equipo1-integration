@@ -1,9 +1,10 @@
-import { API_TESTMAIL, NAMESPACE_TESTMAIL } from "../../temp.js"
 import { sleep } from "../../domain/utils/sleep.js"
+import { config } from "../Shared/config.js"
 
 export class TestInbox {
-  constructor() {
-    this.messages = []
+  constructor({ apiKey = process.env.API_TESTMAIL, namespace = config.testInbox.namespace } = {}) {
+    this.apiKey = apiKey
+    this.namespace = namespace
   }
 
   /**
@@ -13,8 +14,8 @@ export class TestInbox {
    */
   async getEmails(from) {
     const params = new URLSearchParams({
-      apikey: API_TESTMAIL,
-      namespace: NAMESPACE_TESTMAIL,
+      apikey: this.apiKey,
+      namespace: this.namespace,
       pretty: true,
       timestamp_from: from.getTime(),
     })
@@ -33,12 +34,14 @@ export class TestInbox {
   }
 
   async getLastEmail() {
-    while (true) {
+    let maxAttempts = 50
+    while (maxAttempts > 0) {
       const emails = await this.getEmailsInLast5Seconds()
       if (emails.length > 0) {
         return emails[0]
       }
       await sleep(100)
+      maxAttempts--
     }
   }
 }

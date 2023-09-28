@@ -2,18 +2,27 @@ import { EmailSender } from "../../domain/services/EmailSender.js"
 import { API_MAILGUN } from "../../temp.js"
 
 export class EmailSenderMailgun extends EmailSender {
+  constructor({
+    domain = "sandbox438c8dd938f0410aa1dd0393b97f4f46.mailgun.org",
+    authUser = "api",
+    apiKey = API_MAILGUN,
+  } = {}) {
+    super()
+    this.domain = domain
+    this.authUser = authUser
+    this.apiKey = apiKey
+  }
   async sendWelcomeEmail(user) {
     const body = new FormData()
-    const domain = "sandbox438c8dd938f0410aa1dd0393b97f4f46.mailgun.org"
-    const url = `https://api.mailgun.net/v3/${domain}/messages`
+    const url = `https://api.mailgun.net/v3/${this.domain}/messages`
     const options = {
       method: "POST",
       headers: {
-        Authorization: `Basic ${btoa(`api:${API_MAILGUN}`)}`,
+        Authorization: `Basic ${btoa(`${this.authUser}:${this.apiKey}`)}`,
       },
       body,
     }
-    const from = `Excited User <mailgun@${domain}>`
+    const from = `Excited User <mailgun@${this.domain}>`
     const to = user.email.email
     const subject = "Welcome"
     const text = "Welcome to my app"
