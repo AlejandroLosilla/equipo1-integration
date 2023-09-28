@@ -13,7 +13,7 @@ jobs:
       postgres:
         image: postgres:12.8-alpine
         ports:
-          - "5432:5432"
+          - "5431:5432"
         env:
           POSTGRES_USER: "admin"
           POSTGRES_PASSWORD: "password"
@@ -38,5 +38,5 @@ jobs:
       - run: npm run migrate
       - run: npm run test:all
         env:
-          MAILGUN_API_KEY: ${{ secrets.MAILGUN_API_KEY }}
-          TESTMAIL_API_KEY: ${{ secrets.TESTMAIL_API_KEY }}
+          MAILGUN_API_KEY: ${{ secrets.API_MAILGUN }}
+          TESTMAIL_API_KEY: ${{ secrets.API_TESTMAIL }}
