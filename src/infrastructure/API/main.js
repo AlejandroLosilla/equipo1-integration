@@ -4,7 +4,6 @@ import { IdGeneratorNode } from "../IdGenerator/IdGeneratorNode.js"
 import { EmailSenderMock } from "../EmailSender/EmailSenderMock.js"
 import { RegisterUser } from "../../application/RegisterUser.js"
 import { PostUserController } from "./Controllers/PostUserController.js"
-import { Endpoints } from "./enums/Endpoints.js"
 
 const app = express()
 const port = 3000
@@ -17,7 +16,7 @@ const emailSender = new EmailSenderMock()
 const registerUser = new RegisterUser(userRepository, idGenerator, emailSender)
 const postUserController = new PostUserController(registerUser)
 
-app.post(Endpoints.POST_USER, postUserController.execute)
+app.post("/users/register", postUserController.execute)
 
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
