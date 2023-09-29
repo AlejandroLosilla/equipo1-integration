@@ -13,13 +13,13 @@ export const config = {
   },
   mongo: {
     user: "admin",
-    password: process.env.MONGO_PASSWORD,
+    password: process.env.MONGO_PASSWORD || "password",
     address: "localhost",
     port: "27017",
   },
   postgres: {
     user: "admin",
-    password: process.env.POSTGRES_PASSWORD,
+    password: process.env.POSTGRES_PASSWORD || "password",
     host: "localhost",
     db: "my-project",
     port: "5431",
