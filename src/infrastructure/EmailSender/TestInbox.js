@@ -5,6 +5,7 @@ export class TestInbox {
   constructor({ apiKey = process.env.API_TESTMAIL, namespace = config.testInbox.namespace } = {}) {
     this.apiKey = apiKey
     this.namespace = namespace
+    this.emails = []
   }
 
   /**
