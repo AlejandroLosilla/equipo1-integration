@@ -2,7 +2,7 @@ import { sleep } from "../../domain/utils/sleep.js"
 import { config } from "../Shared/config.js"
 
 export class TestInbox {
-  constructor({ apiKey = config.mailgun.apiKey, namespace = "kcat1" } = {}) {
+  constructor({ apiKey = config.testInbox.apiKey, namespace = config.testInbox.namespace } = {}) {
     this.apiKey = apiKey
     this.namespace = namespace
   }
