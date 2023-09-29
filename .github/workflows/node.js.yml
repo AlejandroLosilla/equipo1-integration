@@ -16,13 +16,13 @@ jobs:
           - "5431:5432"
         env:
           POSTGRES_USER: "admin"
-          POSTGRES_PASSWORD: "password"
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
           POSTGRES_DB: "my-project"
       mongo:
         image: mongo:6.0.7-jammy
         env:
-          MONGO_INITDB_ROOT_USERNAME: admin
-          MONGO_INITDB_ROOT_PASSWORD: password
+          MONGO_INITDB_ROOT_USERNAME: "admin"
+          MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGO_PASSWORD }}
         ports:
           - "27017:27017"
       redis:
