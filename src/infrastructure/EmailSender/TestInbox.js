@@ -2,7 +2,7 @@ import { sleep } from "../../domain/utils/sleep.js"
 import { config } from "../Shared/config.js"
 
 export class TestInbox {
-  constructor({ apiKey = process.env.API_TESTMAIL, namespace = config.testInbox.namespace } = {}) {
+  constructor({ apiKey = config.mailgun.apiKey, namespace = "kcat1" } = {}) {
     this.apiKey = apiKey
     this.namespace = namespace
   }
@@ -36,8 +36,7 @@ export class TestInbox {
   async getLastEmail() {
     let maxAttempts = 50
     while (maxAttempts > 0) {
-      let emails = []
-      emails = await this.getEmailsInLast5Seconds()
+      const emails = await this.getEmailsInLast5Seconds()
       if (emails.length > 0) {
         return emails[0]
       }
