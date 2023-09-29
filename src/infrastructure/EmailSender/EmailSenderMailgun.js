@@ -32,6 +32,11 @@ export class EmailSenderMailgun extends EmailSender {
     body.append("text", text)
 
     const request = await fetch(url, options)
+
+    if (request.status === 401) {
+      throw new Error("Invalid API key")
+    }
+
     const response = await request.json()
 
     if (!request.ok) {

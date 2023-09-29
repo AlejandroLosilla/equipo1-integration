@@ -19,4 +19,19 @@ describe("EmailSenderMailgun", () => {
     const receivedEmail = await testInbox.getLastEmail()
     expect(receivedEmail.text).toContain("Welcome to my app")
   })
+  it("throws an error if the api key is invalid", async () => {
+    const emailSender = new EmailSenderMailgun({
+      apiKey: "invalid-api-key",
+    })
+    const id = "00000000-0000-0000-0000-000000000000"
+    const name = "John Doe"
+    const email = "kcat1.test@inbox.testmail.app"
+    const age = 18
+    const password = "password"
+    const user = User.create(id, name, email, password, age)
+
+    const result = emailSender.sendWelcomeEmail(user)
+
+    await expect(result).rejects.toThrow("Invalid API key")
+  })
 })
