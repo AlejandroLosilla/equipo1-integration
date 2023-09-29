@@ -5,7 +5,6 @@ export class TestInbox {
   constructor({ apiKey = process.env.API_TESTMAIL, namespace = config.testInbox.namespace } = {}) {
     this.apiKey = apiKey
     this.namespace = namespace
-    this.emails = []
   }
 
   /**
@@ -37,7 +36,8 @@ export class TestInbox {
   async getLastEmail() {
     let maxAttempts = 50
     while (maxAttempts > 0) {
-      const emails = await this.getEmailsInLast5Seconds()
+      let emails = []
+      emails = await this.getEmailsInLast5Seconds()
       if (emails.length > 0) {
         return emails[0]
       }
