@@ -13,6 +13,7 @@
     "vitest": "^0.34.5"
   },
   "scripts": {
+    "start": "node src/infrastructure/API/main.js",
     "test": "npm run test:unit",
     "test:all": "vitest",
     "test:integration": "vitest --run --config vite.config.integration.js",
@@ -37,12 +38,12 @@
   "homepage": "https://github.com/AgileCraftsmanshipCanarias/kata-setup-javascript#readme",
   "dependencies": {
     "@koa/router": "^12.0.0",
-    "express": "^4.18.2",
+    "express": "^5.0.0-beta.1",
     "koa": "^2.14.2",
     "koa-body": "^6.0.1",
     "mongodb": "^6.1.0",
     "pg": "^8.11.3",
     "redis": "^4.6.10",
-    "zod": "^3.22.2"
+    "zod": "^3.22.4"
   }
 }

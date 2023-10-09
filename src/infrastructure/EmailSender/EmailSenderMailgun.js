@@ -1,5 +1,6 @@
 import { EmailSender } from "../../domain/services/EmailSender.js"
 import { config } from "../Shared/config.js"
+import { InvalidApiKeyError } from "../../domain/errors/InvalidApiKeyError.js"
 export class EmailSenderMailgun extends EmailSender {
   constructor({
     domain = "sandbox438c8dd938f0410aa1dd0393b97f4f46.mailgun.org",
@@ -34,12 +35,12 @@ export class EmailSenderMailgun extends EmailSender {
     const request = await fetch(url, options)
 
     if (request.status === 401) {
-      throw new Error("Invalid API key")
+      throw new InvalidApiKeyError()
     }
 
     const response = await request.json()
 
-    if (!request.ok) {
+    if (request.status !== 200) {
       throw new Error(response.message)
     }
   }

@@ -4,11 +4,7 @@ export class PostUserController {
   }
   execute = async (req, res) => {
     const { name, email, password, age } = req.body
-    try {
-      await this.registerUser.execute(name, email, password, age)
-      await res.status(201).send("User created successfully")
-    } catch (error) {
-      res.status(400).send(error.message)
-    }
+    await this.registerUser.execute(name, email, password, age)
+    res.status(201).send("User created successfully")
   }
 }

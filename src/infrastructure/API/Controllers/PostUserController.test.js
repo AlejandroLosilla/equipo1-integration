@@ -39,13 +39,4 @@ describe("PostUserController", () => {
     expect(res.status).toHaveBeenCalledWith(201)
     expect(res.send).toHaveBeenCalledWith("User created successfully")
   })
-  describe("Error handling", () => {
-    it("responds with status 400 when is invalid", async () => {
-      registerUser.execute = vi.fn(() => {
-        throw new Error("Invalid user")
-      })
-      await postUserController.execute(req, res)
-      expect(res.status).toHaveBeenCalledWith(400)
-    })
-  })
 })

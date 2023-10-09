@@ -1,9 +1,11 @@
+import { UserMustBe18OrOlderError } from "../errors/UserMustBeLegalAgeError.js"
+
 export class UserAge {
   constructor(age) {
     this.age = age
 
     if (age < 18) {
-      throw new Error("User must be 18 or older")
+      throw new UserMustBe18OrOlderError()
     }
   }
 
