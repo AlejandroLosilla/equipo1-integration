@@ -17,6 +17,7 @@ const emailSender = new EmailSenderMock()
 const registerUser = new RegisterUser(userRepository, idGenerator, emailSender)
 const postUserController = new PostUserController(registerUser)
 
+await userRepository.connect()
 app.post("/users/register", postUserController.execute)
 
 app.use(errorHandler)

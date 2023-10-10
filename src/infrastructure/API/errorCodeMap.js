@@ -1,4 +1,4 @@
-import { ErrorCode } from "../../domain/errors/ErrorCode"
+import { ErrorCode } from "../../domain/errors/ErrorCode.js"
 export const ErrorMap = {
   [ErrorCode.USER_ALREADY_EXISTS]: 409,
   [ErrorCode.INVALID_API_KEY]: 401,
