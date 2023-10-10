@@ -10,6 +10,7 @@
     "eslint": "^8.49.0",
     "husky": "^8.0.3",
     "prettier": "^3.0.3",
+    "tepper": "^1.1.0",
     "vitest": "^0.34.5"
   },
   "scripts": {
@@ -17,6 +18,7 @@
     "test": "npm run test:unit",
     "test:all": "vitest",
     "test:integration": "vitest --run --config vite.config.integration.js",
+    "test:e2e": "vitest --run --config vite.config.e2e.js",
     "test:unit": "vitest --run --config vite.config.unit.js",
     "test:coverage": "vitest --coverage",
     "lint:fix": "eslint . --fix",

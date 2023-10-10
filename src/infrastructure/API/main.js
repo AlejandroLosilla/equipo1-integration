@@ -25,3 +25,7 @@ app.use(errorHandler)
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`)
 })
+
+app.get("/hello_world", (req, res) => {
+  res.json({ hola: "mundo" })
+})
