@@ -1,6 +1,6 @@
 export class PostLoginUserController {
   constructor(loginUser) {
-  this.loginUser = loginUser
+    this.loginUser = loginUser
   }
   execute = async (req, res) => {
     const { email, password } = req.body

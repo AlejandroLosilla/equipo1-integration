@@ -32,7 +32,7 @@ export class Server {
       emailSender,
       registerUser,
       postUserController,
-      postLoginUserController
+      postLoginUserController,
     }
   }
 

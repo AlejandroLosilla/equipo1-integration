@@ -40,9 +40,8 @@ describe("E2E Server tests", () => {
         password: "123456",
       })
       .run()
-    
+
     expect(response2.status).toEqual(200)
     expect(response2.body.token).toContain("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
   })
-
 })
