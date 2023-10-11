@@ -1,6 +1,6 @@
-import { Server } from "./Server.js";
+import { Server } from "./Server.js"
 
-const server = new Server;
+const server = new Server()
 
 await server.connect()
 

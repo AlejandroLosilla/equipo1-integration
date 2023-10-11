@@ -1,11 +1,36 @@
+import { expect, describe, it, beforeAll, afterAll, beforeEach } from "vitest"
+import { Server } from "./Server.js"
 import tepper from "tepper"
-import { expect, describe, it } from "vitest"
-import { app } from "./App"
 
-describe("GET /hello_world with status 200", () => {
-  it("should return 200 OK", async () => {
-    const { body } = await tepper(app).get("/hello_world").run()
+describe("E2E Server tests", () => {
+  const server = new Server()
 
-    expect(body).toEqual({ hola: "mundo" })
+  beforeAll(async () => {
+    await server.connect()
+    server.listen()
+  })
+
+  afterAll(async () => {
+    await server.disconnect()
+  })
+
+  beforeEach(async () => {
+    await server.reset()
+  })
+
+  it("should register a user", async () => {
+    const app = server.app
+
+    const response = await tepper(app)
+      .post("/users/register")
+      .send({
+        name: "hola",
+        email: "1234@56789.com",
+        password: "123456",
+        age: 18,
+      })
+      .run()
+
+    expect(response.status).toEqual(201)
   })
 })
