@@ -5,6 +5,7 @@ import { EmailSenderMock } from "../EmailSender/EmailSenderMock.js"
 import { RegisterUser } from "../../application/RegisterUser.js"
 import { PostUserController } from "./Controllers/PostUserController.js"
 import { errorHandler } from "../Middlewares/errorHandler.js"
+import { PostLoginUserController } from "./Controllers/PostLoginUserController.js"
 
 export class Server {
   constructor() {
@@ -13,6 +14,7 @@ export class Server {
     this.app = express()
     this.app.use(express.json())
     this.app.post("/users/register", this.dependencies.postUserController.execute)
+    this.app.post("/users/login", this.dependencies.postLoginUserController.execute)
     this.app.use(errorHandler)
   }
 
@@ -22,6 +24,7 @@ export class Server {
     const emailSender = new EmailSenderMock()
     const registerUser = new RegisterUser(userRepository, idGenerator, emailSender)
     const postUserController = new PostUserController(registerUser)
+    const postLoginUserController = new PostLoginUserController()
 
     return {
       userRepository,
@@ -29,6 +32,7 @@ export class Server {
       emailSender,
       registerUser,
       postUserController,
+      postLoginUserController
     }
   }
 

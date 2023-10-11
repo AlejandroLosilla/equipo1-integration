@@ -32,5 +32,17 @@ describe("E2E Server tests", () => {
       .run()
 
     expect(response.status).toEqual(201)
+
+    const response2 = await tepper(app)
+      .post("/users/login")
+      .send({
+        email: "1234@56789.com",
+        password: "123456",
+      })
+      .run()
+    
+    expect(response2.status).toEqual(200)
+    expect(response2.body.token).toContain("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9")
   })
+
 })
