@@ -14,7 +14,7 @@ export class RegisterUser {
   }
 
   async execute(name, email, password, age) {
-    const alreadyExists = await this.userRepository.existsByEmail(email)
+    const alreadyExists = await this.userRepository.findByEmail(email)
 
     if (alreadyExists) {
       throw new UserAlreadyExistsError()

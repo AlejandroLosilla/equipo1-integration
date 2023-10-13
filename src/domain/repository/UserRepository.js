@@ -23,7 +23,7 @@ export class UserRepository {
    * @returns {Promise<User|null>}
    */
   // eslint-disable-next-line no-unused-vars
-  async existsByEmail(email) {
+  async findByEmail(email) {
     throw new Error("This is an abstract class. You should implement the existsByEmail method")
   }
 }

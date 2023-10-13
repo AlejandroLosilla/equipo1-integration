@@ -43,7 +43,7 @@ describe("RegisterUser", () => {
   })
 
   it("must throw an error if the user already exists", async () => {
-    vi.spyOn(userRepository, "existsByEmail").mockReturnValue(true)
+    vi.spyOn(userRepository, "findByEmail").mockReturnValue(true)
 
     const result = registerUser.execute(notImportantName, notImportantEmail, notImportantPassword, notImportantAge)
 

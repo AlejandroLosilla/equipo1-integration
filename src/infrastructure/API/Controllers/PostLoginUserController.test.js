@@ -47,7 +47,7 @@ describe("PostLoginUserController", () => {
     expect(res.status).toHaveBeenCalledWith(200)
   })
 
-  it("respnds with token", async () => {
+  it("responds with token", async () => {
     const req = {
       body: {
         email,
@@ -70,7 +70,7 @@ describe("PostLoginUserController", () => {
     await expect(result).rejects.toBeInstanceOf(ZodError)
   })
 
-   it("throws a zod error if password is not defined", async () => {
+  it("throws a zod error if password is not defined", async () => {
     const req = {
       body: {
         email,
@@ -79,12 +79,11 @@ describe("PostLoginUserController", () => {
 
     const result = postLoginUserController.execute(req, res)
     await expect(result).rejects.toBeInstanceOf(ZodError)
-   })
-  
+  })
+
   it("throws and error if loginUser is undefined", async () => {
     expect(() => {
       new PostLoginUserController()
-    })
-    .toThrow()
+    }).toThrow()
   })
 })

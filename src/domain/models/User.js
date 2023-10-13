@@ -38,4 +38,8 @@ export class User {
   getPassword() {
     return this.password
   }
+
+  getId() {
+    return this.id
+  }
 }
