@@ -3,7 +3,8 @@ import { UserRepositoryMock } from "../infrastructure/UserRepository/UserReposit
 import { IdGeneratorMock } from "../infrastructure/IdGenerator/IdGeneratorMock.js"
 import { User } from "../domain/models/User.js"
 import { JsonWebTokenManagerMock } from "../infrastructure/JsonWebTokenManager/JsonWebTokenManagerMock.js"
-import { LoginUsergit } from "./LoginUser.js"
+import { LoginUser } from "./LoginUser.js"
+import { UserNotFoundError } from "../domain/errors/UserNotFoundError.js"
 
 describe("LoginUser", () => {
   let userRepository
@@ -28,5 +29,16 @@ describe("LoginUser", () => {
     const token = await loginUser.execute(email, password)
 
     expect(token).toEqual(tokenMock)
+  })
+
+  it("throws an error if user doesn't exists", async () => {
+    const name = "manolo"
+    const email = "manolo@gmail.com"
+    vi.spyOn(userRepository, "findByEmail").mockReturnValue(null)
+    const loginUser = new LoginUser(userRepository, jsonWebTokenManager)
+
+    const result = loginUser.execute(email, password)
+
+    await expect(result).rejects.toBeInstanceOf(UserNotFoundError)
   })
 })
