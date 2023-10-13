@@ -69,4 +69,22 @@ describe("PostLoginUserController", () => {
     const result = postLoginUserController.execute(req, res)
     await expect(result).rejects.toBeInstanceOf(ZodError)
   })
+
+   it("throws a zod error if password is not defined", async () => {
+    const req = {
+      body: {
+        email,
+      },
+    }
+
+    const result = postLoginUserController.execute(req, res)
+    await expect(result).rejects.toBeInstanceOf(ZodError)
+   })
+  
+  it("throws and error if loginUser is undefined", async () => {
+    expect(() => {
+      new PostLoginUserController()
+    })
+    .toThrow()
+  })
 })

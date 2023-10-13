@@ -2,11 +2,15 @@ import * as z from "zod"
 
 const schema = z.object({
   email: z.string(),
-  //password: z.string(),
+  password: z.string(),
 })
 
 export class PostLoginUserController {
   constructor(loginUser) {
+
+    if (!loginUser) {
+      throw new Error("loginUser is undefined")
+    }
     this.loginUser = loginUser
   }
   execute = async (req, res) => {
