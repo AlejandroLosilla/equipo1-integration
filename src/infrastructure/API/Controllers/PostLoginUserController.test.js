@@ -1,18 +1,28 @@
-import { describe, it, expect, vi } from "vitest"
+import { describe, it, expect, vi, beforeEach } from "vitest"
 import { PostLoginUserController } from "./PostLoginUserController.js"
+import { ZodError } from "zod"
 
 describe("PostLoginUserController", () => {
   const email = "hola@hola.com"
   const password = "123456"
-  let res = {
-    status: vi.fn(),
-  }
-  const loginUser = {
-    execute: vi.fn(),
-  }
-  const postLoginUserController = new PostLoginUserController(loginUser)
+  const token = "myToken"
+  let res
+  let json
+  let loginUser
+  let postLoginUserController
 
-  it("check if user has succesfully logged in", async () => {
+  beforeEach(() => {
+    json = vi.fn()
+    res = {
+      status: vi.fn(() => ({ json })),
+    }
+    loginUser = {
+      execute: vi.fn(() => token),
+    }
+    postLoginUserController = new PostLoginUserController(loginUser)
+  })
+
+  it("invokes the use case", async () => {
     const req = {
       body: {
         email,
@@ -35,5 +45,28 @@ describe("PostLoginUserController", () => {
     await postLoginUserController.execute(req, res)
 
     expect(res.status).toHaveBeenCalledWith(200)
+  })
+
+  it("respnds with token", async () => {
+    const req = {
+      body: {
+        email,
+        password,
+      },
+    }
+
+    await postLoginUserController.execute(req, res)
+    expect(json).toHaveBeenCalledWith({ token })
+  })
+
+  it("throws a zod error if email is not defined", async () => {
+    const req = {
+      body: {
+        password,
+      },
+    }
+
+    const result = postLoginUserController.execute(req, res)
+    await expect(result).rejects.toBeInstaceOf(ZodError)
   })
 })

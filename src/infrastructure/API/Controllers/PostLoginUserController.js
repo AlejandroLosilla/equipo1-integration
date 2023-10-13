@@ -1,11 +1,19 @@
+import * as z from "zod"
+
+const schema = z.object({
+  email: z.string(),
+  //password: z.string(),
+})
+
 export class PostLoginUserController {
   constructor(loginUser) {
     this.loginUser = loginUser
   }
   execute = async (req, res) => {
-    const { email, password } = req.body
-    await this.loginUser.execute(email, password)
+    const { email, password } = schema.parse(req.body)
 
-    res.status(200)
+    const token = await this.loginUser.execute(email, password)
+
+    res.status(200).json({ token })
   }
 }
