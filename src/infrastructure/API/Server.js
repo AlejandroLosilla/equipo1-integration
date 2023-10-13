@@ -24,7 +24,7 @@ export class Server {
     const emailSender = new EmailSenderMock()
     const registerUser = new RegisterUser(userRepository, idGenerator, emailSender)
     const postUserController = new PostUserController(registerUser)
-    const postLoginUserController = new PostLoginUserController()
+    const postLoginUserController = new PostLoginUserController(loginUser)
 
     return {
       userRepository,
