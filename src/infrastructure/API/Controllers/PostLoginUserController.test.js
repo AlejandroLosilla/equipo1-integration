@@ -67,6 +67,6 @@ describe("PostLoginUserController", () => {
     }
 
     const result = postLoginUserController.execute(req, res)
-    await expect(result).rejects.toBeInstaceOf(ZodError)
+    await expect(result).rejects.toBeInstanceOf(ZodError)
   })
 })
