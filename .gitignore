@@ -24,3 +24,5 @@ dist/
 src/temp.js
 
 .env
+
+pnpm-lock.yaml

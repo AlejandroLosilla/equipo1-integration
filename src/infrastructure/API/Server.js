@@ -6,6 +6,8 @@ import { RegisterUser } from "../../application/RegisterUser.js"
 import { PostUserController } from "./Controllers/PostUserController.js"
 import { errorHandler } from "../Middlewares/errorHandler.js"
 import { PostLoginUserController } from "./Controllers/PostLoginUserController.js"
+import { LoginUser } from "../../application/LoginUser.js"
+import { JsonWebTokenNode } from "../../domain/services/JsonWebTokenNode.js"
 
 export class Server {
   constructor() {
@@ -22,7 +24,9 @@ export class Server {
     const userRepository = new UserRepositoryMongo()
     const idGenerator = new IdGeneratorNode()
     const emailSender = new EmailSenderMock()
+    const jsonWebTokenManager = new JsonWebTokenNode()
     const registerUser = new RegisterUser(userRepository, idGenerator, emailSender)
+    const loginUser = new LoginUser(userRepository, jsonWebTokenManager)
     const postUserController = new PostUserController(registerUser)
     const postLoginUserController = new PostLoginUserController(loginUser)
 
